@@ -304,6 +304,44 @@
 
   .demo-badge{position:fixed;left:16px;bottom:16px;z-index:80;background:var(--surface);border:1px solid var(--line);color:var(--muted);font-size:.76rem;font-weight:700;padding:7px 12px;border-radius:999px;box-shadow:var(--shadow-sm)}
 
+  /* ---- Image upload preview + gallery ---- */
+  .imgprev-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .imgprev{position:relative;width:88px;height:58px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+  .imgprev img{width:100%;height:100%;object-fit:cover;display:block}
+  .imgprev button{position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:6px;background:rgba(0,0,0,.62);color:#fff;font-weight:800;line-height:1;display:grid;place-items:center;font-size:.9rem}
+  input[type=file]{font-size:.88rem;color:var(--ink-2)}
+  input[type=file]::file-selector-button{margin-right:10px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink);padding:8px 12px;border-radius:8px;font-weight:700;cursor:pointer}
+  .gal-thumbs{display:flex;gap:8px;padding:12px;flex-wrap:wrap}
+  .gal-thumbs .gt{width:66px;height:46px;border-radius:7px;overflow:hidden;border:2px solid transparent;cursor:pointer}
+  .gal-thumbs .gt.on{border-color:var(--accent)}
+  .gal-thumbs .gt img{width:100%;height:100%;object-fit:cover;display:block}
+
+  /* ---- Chatbot ---- */
+  .chat-fab{position:fixed;right:20px;bottom:20px;z-index:85;display:flex;align-items:center;gap:9px;background:var(--accent);color:#fff;border-radius:999px;padding:13px 19px;font-weight:800;font-size:.92rem;box-shadow:var(--shadow-lg);transition:transform .15s,background .15s}
+  .chat-fab:hover{transform:translateY(-2px);background:var(--accent-2)}
+  .chat-panel{position:fixed;right:20px;bottom:20px;z-index:86;width:360px;max-width:calc(100vw - 32px);height:540px;max-height:calc(100vh - 40px);background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);display:none;flex-direction:column;overflow:hidden}
+  .chat-panel.open{display:flex;animation:pop .2s ease}
+  .chat-head{background:var(--petrol);color:var(--petrol-ink);padding:14px 16px;display:flex;align-items:center;gap:11px}
+  .chat-head .av{width:38px;height:38px;border-radius:10px;background:var(--on-petrol-accent);color:var(--petrol);display:grid;place-items:center;font-weight:900;font-size:.9rem;flex:none}
+  .chat-head .t1{font-weight:800;font-size:.98rem}
+  .chat-head .t2{font-size:.76rem;color:var(--petrol-mut);display:flex;align-items:center;gap:6px}
+  .chat-head .dot{width:8px;height:8px;border-radius:50%;background:#49c07d;display:inline-block}
+  .chat-head .x{margin-left:auto;color:var(--petrol-ink);opacity:.85;width:32px;height:32px;display:grid;place-items:center;border-radius:8px}
+  .chat-head .x:hover{background:rgba(255,255,255,.12)}
+  .chat-body{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:11px;background:var(--surface-2)}
+  .msg-b{max-width:84%;padding:10px 13px;border-radius:14px;font-size:.89rem;line-height:1.45}
+  .msg-bot{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px;color:var(--ink)}
+  .msg-user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:4px}
+  .msg-b .cta-mini{display:inline-flex;margin-top:8px;font-weight:700;color:var(--accent);cursor:pointer;font-size:.85rem;border:1px solid var(--line);padding:6px 11px;border-radius:8px;background:var(--surface-2)}
+  .msg-b .cta-mini:hover{border-color:var(--accent)}
+  .chat-quick{display:flex;gap:7px;flex-wrap:wrap;padding:10px 12px 4px;background:var(--surface)}
+  .chat-quick button{font-size:.78rem;font-weight:700;border:1px solid var(--line);color:var(--ink-2);padding:6px 11px;border-radius:999px;background:var(--surface-2)}
+  .chat-quick button:hover{border-color:var(--accent);color:var(--accent)}
+  .chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:var(--surface)}
+  .chat-input input{flex:1;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+  .chat-input button{background:var(--accent);color:#fff;border-radius:10px;width:44px;flex:none;display:grid;place-items:center}
+  .chat-input button:hover{background:var(--accent-2)}
+
   @media (max-width:860px){
     .hero .wrap{grid-template-columns:1fr;padding:48px 24px 60px}
     .detail{grid-template-columns:1fr}
@@ -533,6 +571,10 @@
           <div class="form-field"><label>Effekt (hk)</label><input id="cfPower" type="number" placeholder="197"></div>
           <div class="form-field full"><label>Beskrivelse</label><textarea id="cfDesc" placeholder="Beskriv bilen…"></textarea></div>
           <div class="form-field full"><label>Utstyr (ett per linje)</label><textarea id="cfEquip" placeholder="Skinnseter&#10;Navigasjon&#10;Ryggekamera"></textarea></div>
+          <div class="form-field full"><label>Bilder av bilen (kan velge flere)</label>
+            <input id="cfImages" type="file" accept="image/*" multiple onchange="handleImgFiles(this)">
+            <div class="imgprev-row" id="cfImgPreview"></div>
+          </div>
           <div class="form-field full"><label>Lakkfarge (for annonsebilde)</label>
             <div class="paint-row" id="paintRow"></div>
           </div>
@@ -544,6 +586,25 @@
       </form>
     </div>
   </div>
+</div>
+
+<!-- ============ CHATBOT ============ -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()">
+  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  Chat med oss
+</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head">
+    <div class="av">OB</div>
+    <div><div class="t1">Olsvik Bil</div><div class="t2"><span class="dot"></span>Svarer vanligvis med en gang</div></div>
+    <button class="x" onclick="toggleChat()" aria-label="Lukk chat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-quick" id="chatQuick"></div>
+  <form class="chat-input" onsubmit="return sendChat(event)">
+    <input id="chatInput" placeholder="Skriv en melding…" autocomplete="off">
+    <button type="submit" aria-label="Send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg></button>
+  </form>
 </div>
 
 <div id="toast"></div>
@@ -582,6 +643,12 @@ function carSVG(color,uid){
       <circle cx="336" cy="196" r="33" fill="#14181c"/><circle cx="336" cy="196" r="20" fill="#cfd6db"/><circle cx="336" cy="196" r="19" fill="none" stroke="#8b959d" stroke-width="2"/><circle cx="336" cy="196" r="6" fill="#5c666e"/>
     </g>
   </svg>`;
+}
+
+/* ---------- Visual: real photo if uploaded, else illustration ---------- */
+function carVisual(c,uid){
+  if(c.images&&c.images.length){return `<img src="${c.images[0]}" alt="${c.brand} ${c.model}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">`;}
+  return carSVG(c.color,uid);
 }
 
 /* ---------- Seed data ---------- */
@@ -635,7 +702,10 @@ function load(){
   try{cars=JSON.parse(localStorage.getItem(LS_CARS))||seedCars();}catch(e){cars=seedCars();}
   try{leads=JSON.parse(localStorage.getItem(LS_LEADS))||seedLeads();}catch(e){leads=seedLeads();}
 }
-function save(){localStorage.setItem(LS_CARS,JSON.stringify(cars));localStorage.setItem(LS_LEADS,JSON.stringify(leads));}
+function save(){try{localStorage.setItem(LS_CARS,JSON.stringify(cars));localStorage.setItem(LS_LEADS,JSON.stringify(leads));}catch(e){showToast('Nettleseren er full — prøv færre/mindre bilder');}}
+function setGalMain(idx,id){const c=cars.find(x=>x.id===id);if(!c||!c.images)return;document.getElementById('galMain').innerHTML=`<img src="${c.images[idx]}" alt="${c.brand} ${c.model}" style="width:100%;height:100%;object-fit:cover;display:block">`;document.querySelectorAll('#galThumbs .gt').forEach((t,i)=>t.classList.toggle('on',i===idx));}
+/* Downscale + compress uploaded photos so they fit in localStorage */
+function fileToDataURL(file,maxW,cb){const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>{let w=img.width,h=img.height;if(w>maxW){h=Math.round(h*maxW/w);w=maxW;}const cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(img,0,0,w,h);cb(cv.toDataURL('image/jpeg',0.82));};img.src=e.target.result;};r.readAsDataURL(file);}
 function resetDemo(){localStorage.removeItem(LS_CARS);localStorage.removeItem(LS_LEADS);load();renderAll();showToast('Demodata nullstilt');}
 
 /* ---------- Formatting ---------- */
@@ -665,7 +735,7 @@ function renderInventory(){
   grid.innerHTML=list.map(c=>`
     <article class="car ${c.status==='sold'?'sold':''}" onclick="openCar('${c.id}')">
       <div class="thumb">
-        ${carSVG(c.color,'card'+c.id)}
+        ${carVisual(c,'card'+c.id)}
         ${c.status==='sold'?'<span class="tag pill pill-sold">Solgt</span>':'<span class="tag pill pill-good">Til salgs</span>'}
         <span class="fav"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3 5 6.5 5 9 5 12 8 12 8s3-3 5.5-3C21 5 23 8.5 21.5 12 19 16.5 12 21 12 21z"/></svg></span>
       </div>
@@ -688,10 +758,14 @@ function openCar(id){
   const c=cars.find(x=>x.id===id);if(!c)return;currentCar=c;
   c.views++;save();
   const d=document.getElementById('carDetail');
+  const hasImg=c.images&&c.images.length;
+  const mainVisual=hasImg?`<img src="${c.images[0]}" alt="${c.brand} ${c.model}" style="width:100%;height:100%;object-fit:cover;display:block">`:carSVG(c.color,'big'+c.id);
+  const thumbs=hasImg&&c.images.length>1?`<div class="gal-thumbs" id="galThumbs">${c.images.map((im,i)=>`<div class="gt ${i===0?'on':''}" onclick="setGalMain(${i},'${c.id}')"><img src="${im}" alt=""></div>`).join('')}</div>`:'';
   d.innerHTML=`
     <div class="media">
       ${c.status==='sold'?'<span class="tag pill pill-sold">Solgt</span>':'<span class="tag pill pill-good">Til salgs</span>'}
-      <div class="big">${carSVG(c.color,'big'+c.id)}</div>
+      <div class="big" id="galMain">${mainVisual}</div>
+      ${thumbs}
     </div>
     <div class="info">
       <span class="eyebrow">${c.year} · ${c.fuel}</span>
@@ -744,6 +818,9 @@ function setView(v){
   document.getElementById('publicView').style.display=v==='public'?'block':'none';
   document.getElementById('adminView').style.display=v==='admin'?'block':'none';
   if(v==='admin'){document.getElementById('adminLogin').style.display=isLoggedIn?'none':'block';document.getElementById('adminShell').style.display=isLoggedIn?'block':'none';if(isLoggedIn)renderAdmin();}
+  const onPublic=v==='public';
+  if(!onPublic){chatOpen=false;document.getElementById('chatPanel').classList.remove('open');}
+  document.getElementById('chatFab').style.display=(onPublic&&!chatOpen)?'flex':'none';
   window.scrollTo(0,0);
 }
 let isLoggedIn=false;
@@ -799,7 +876,7 @@ function renderLeads(){
 function renderCarTable(){
   document.getElementById('carTableBody').innerHTML=cars.map(c=>`
     <tr>
-      <td><div class="tc"><div class="thm">${carSVG(c.color,'tbl'+c.id)}</div><div><div class="nm">${c.brand} ${c.model}</div><div class="vr">${c.variant} · ${c.year}</div></div></div></td>
+      <td><div class="tc"><div class="thm">${carVisual(c,'tbl'+c.id)}</div><div><div class="nm">${c.brand} ${c.model}</div><div class="vr">${c.variant} · ${c.year}</div></div></div></td>
       <td class="num" style="font-weight:700">${kr(c.price)} kr</td>
       <td>${c.status==='sold'?'<span class="pill pill-sold">Solgt</span>':'<span class="pill pill-good">Til salgs</span>'}</td>
       <td class="num">${kr(c.views)}</td>
@@ -823,6 +900,10 @@ function deleteCar(id){const c=cars.find(x=>x.id===id);if(!confirm('Slette '+c.b
 
 /* ---------- Car form ---------- */
 let selectedPaint=PAINTS[3];
+let formImages=[];
+function renderFormImages(){document.getElementById('cfImgPreview').innerHTML=formImages.map((src,i)=>`<div class="imgprev"><img src="${src}" alt=""><button type="button" onclick="removeFormImage(${i})" aria-label="Fjern bilde">×</button></div>`).join('');}
+function removeFormImage(i){formImages.splice(i,1);renderFormImages();}
+function handleImgFiles(input){[...input.files].forEach(f=>fileToDataURL(f,1280,d=>{formImages.push(d);renderFormImages();}));input.value='';}
 function buildPaints(sel){
   selectedPaint=sel;
   document.getElementById('paintRow').innerHTML=PAINTS.map(p=>`<button type="button" class="paint ${p===sel?'on':''}" style="background:${p}" onclick="buildPaints('${p}')" aria-label="Farge"></button>`).join('');
@@ -843,6 +924,8 @@ function openCarForm(id){
   document.getElementById('cfDesc').value=f?f.desc:'';
   document.getElementById('cfEquip').value=f?f.equip.join('\n'):'';
   buildPaints(f?f.color:PAINTS[3]);
+  formImages=(f&&f.images)?[...f.images]:[];renderFormImages();
+  document.getElementById('cfImages').value='';
   document.getElementById('carFormModal').classList.add('open');
   document.body.style.overflow='hidden';
 }
@@ -862,7 +945,8 @@ function saveCarForm(e){
     power:+document.getElementById('cfPower').value||0,
     desc:document.getElementById('cfDesc').value.trim()||'Ingen beskrivelse lagt inn.',
     equip:document.getElementById('cfEquip').value.split('\n').map(s=>s.trim()).filter(Boolean),
-    color:selectedPaint
+    color:selectedPaint,
+    images:formImages.slice()
   };
   if(id){Object.assign(cars.find(x=>x.id===id),data);showToast('Bil oppdatert');}
   else{cars.unshift({id:'c'+Date.now(),status:'available',views:0,messages:0,created:Date.now(),...data});showToast('Ny bil lagt ut for salg');}
@@ -875,13 +959,47 @@ function showToast(msg){const t=document.getElementById('toast');t.innerHTML='<s
 function renderAll(){renderInventory();document.getElementById('heroCount').textContent=cars.filter(c=>c.status!=='sold').length;if(isLoggedIn)renderAdmin();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCar();closeCarForm();}});
 
+/* ---------- Chatbot (regelbasert demo, bruker lagerbeholdningen) ---------- */
+const QUICK=['Åpningstider','Har dere elbiler?','Finansiering','Prøvekjøring','Billigste bil'];
+let chatOpen=false, chatSeeded=false;
+function escapeHtml(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function toggleChat(){chatOpen=!chatOpen;document.getElementById('chatPanel').classList.toggle('open',chatOpen);document.getElementById('chatFab').style.display=chatOpen?'none':'flex';if(chatOpen&&!chatSeeded){chatSeeded=true;addMsg('bot','Hei og velkommen til Olsvik Bil! 👋 Jeg kan hjelpe deg med biler på lager, åpningstider, finansiering og prøvekjøring. Hva lurer du på?');document.getElementById('chatQuick').innerHTML=QUICK.map(q=>`<button type="button" onclick="askQuick(this)">${q}</button>`).join('');}}
+function addMsg(who,html){const b=document.getElementById('chatBody');const d=document.createElement('div');d.className='msg-b '+(who==='bot'?'msg-bot':'msg-user');d.innerHTML=html;b.appendChild(d);b.scrollTop=b.scrollHeight;}
+function askQuick(btn){document.getElementById('chatInput').value=btn.textContent;sendChat(null);}
+function sendChat(e){if(e&&e.preventDefault)e.preventDefault();const inp=document.getElementById('chatInput');const t=inp.value.trim();if(!t)return false;addMsg('user',escapeHtml(t));inp.value='';setTimeout(()=>addMsg('bot',botReply(t)),420);return false;}
+function openCarFromChat(id){toggleChat();setView('public');openCar(id);}
+function botReply(q){
+  const s=q.toLowerCase();
+  const avail=cars.filter(c=>c.status!=='sold');
+  const link=c=>`<div><span class="cta-mini" onclick="openCarFromChat('${c.id}')">Se ${c.brand} ${c.model} — ${kr(c.price)} kr</span></div>`;
+  if(/(åpen|åpning|tider|klokk|når.*åpent)/.test(s))return'Vi har åpent <b>mandag–fredag 09–17</b> og <b>lørdag 10–14</b>. Du finner oss i Olsvikåsen 12, 5183 Bergen.';
+  if(/(ring|telefon|nummer|kontakt|e-?post|mail|adresse|hvor)/.test(s))return'Du når oss på <b>55 12 34 56</b> eller <b>post@olsvikbil.no</b>. Adressen er Olsvikåsen 12, 5183 Bergen. Velkommen innom!';
+  if(/(finans|lån|lease|leasing|avbetal|månedspris|kreditt)/.test(s))return'Ja! Vi tilbyr <b>fleksibel finansiering</b> med lån, leasing og innbytte. Si hvilken bil du ser på, så gir vi deg et uforpliktende tilbud på månedspris.';
+  if(/(innbytte|bytte inn|bytte bil|verdivurder)/.test(s))return'Vi tar gjerne bilen din i innbytte og gir deg en gratis verdivurdering. Kom innom, eller send oss reg.nr så gir vi et prisestimat.';
+  if(/(garanti|reklamasjon|tilstand|historikk)/.test(s))return'Alle biler selges med <b>inntil 12 måneders garanti</b> og gjennomgås på over 100 punkter før salg. Full åpenhet om historikk og tilstand.';
+  if(/(prøvekjør|test|se på bil|besøk|prøve)/.test(s))return'Absolutt — vi setter gjerne opp en prøvekjøring! Velg en bil under «Biler til salgs» og trykk «Send melding», eller ring 55 12 34 56.';
+  if(/(elbil|elektrisk|el-bil|tesla|rekkevidde|lade)/.test(s)){const el=avail.filter(c=>c.fuel==='Elektrisk');return el.length?'Vi har disse elbilene på lager nå:'+el.map(link).join(''):'Akkurat nå har vi ingen rene elbiler inne, men vi får inn nye biler jevnlig. Vil du at vi tar kontakt når en kommer?';}
+  if(/(hybrid|ladbar|plug)/.test(s)){const h=avail.filter(c=>/hybrid/i.test(c.fuel));return h.length?'Her er hybridene våre:'+h.map(link).join(''):'Ingen hybrider på lager akkurat nå.';}
+  if(/(diesel)/.test(s)){const d=avail.filter(c=>c.fuel==='Diesel');return d.length?'Dieselbiler på lager:'+d.map(link).join(''):'Ingen dieselbiler inne nå.';}
+  if(/(bensin)/.test(s)){const d=avail.filter(c=>c.fuel==='Bensin');return d.length?'Bensinbiler på lager:'+d.map(link).join(''):'Ingen bensinbiler inne nå.';}
+  if(/(billig|rimel|budsjett|lavest|under|prisgunstig)/.test(s)){const c=[...avail].sort((a,b)=>a.price-b.price)[0];return c?'Vår rimeligste bil akkurat nå:'+link(c):'Ingen biler på lager.';}
+  if(/(dyr|dyrest|beste|premium|luksus)/.test(s)){const c=[...avail].sort((a,b)=>b.price-a.price)[0];return c?'Vår mest eksklusive bil nå:'+link(c):'Ingen biler på lager.';}
+  if(/(familie|suv|stor|barn|henger|romsl)/.test(s)){const su=avail.filter(c=>/RAV4|XC60|Q5/.test(c.model)||c.equip.some(e=>/henger/i.test(e)));return su.length?'Disse passer fint for familie:'+su.slice(0,3).map(link).join(''):'Ta en titt på SUV-ene våre under «Biler til salgs».';}
+  if(/(hvilke|har dere|hva har|lager|utvalg|biler)/.test(s))return`Vi har <b>${avail.length} biler</b> til salgs akkurat nå. Her er noen:`+avail.slice(0,3).map(link).join('')+'<div>Se alle under «Biler til salgs» på siden.</div>';
+  const hit=avail.filter(c=>s.includes(c.brand.toLowerCase())||s.includes(c.model.toLowerCase()));
+  if(hit.length)return'Her er det jeg fant:'+hit.map(link).join('');
+  if(/(hei|hallo|god dag|heisann|yo)/.test(s))return'Hei! 😊 Hva kan jeg hjelpe deg med i dag?';
+  if(/(takk|flott|bra|super)/.test(s))return'Bare hyggelig! Si ifra om det er noe mer du lurer på. 🚗';
+  return'Godt spørsmål! Det enkleste er å ta direkte kontakt: ring <b>55 12 34 56</b> eller bruk kontaktskjemaet. Du kan også spørre meg om åpningstider, finansiering eller hvilke biler vi har på lager.';
+}
+
 /* ---------- Boot ---------- */
 (function init(){
   const savedTheme=localStorage.getItem('olsvikbil_theme');if(savedTheme)document.documentElement.setAttribute('data-theme',savedTheme);
   load();
   // hero featured car
   const feat=cars.find(c=>c.status!=='sold')||cars[0];
-  document.getElementById('heroCard').innerHTML=`${carSVG(feat.color,'hero')}<span class="tag pill pill-accent">Utvalgt</span><div class="meta"><span class="price num">${kr(feat.price)} kr</span><div class="m1">${feat.brand} ${feat.model}</div><div class="m2">${feat.year} · ${fmtKm(feat.km)} · ${feat.fuel}</div></div>`;
+  document.getElementById('heroCard').innerHTML=`${carVisual(feat,'hero')}<span class="tag pill pill-accent">Utvalgt</span><div class="meta"><span class="price num">${kr(feat.price)} kr</span><div class="m1">${feat.brand} ${feat.model}</div><div class="m2">${feat.year} · ${fmtKm(feat.km)} · ${feat.fuel}</div></div>`;
   renderAll();
 })();
 </script>
