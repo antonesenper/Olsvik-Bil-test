@@ -119,8 +119,9 @@
   .hero .stats b{color:var(--ink);font-weight:600}
   .hero .stats .sep{color:var(--line)}
   .feature{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-md)}
-  .feature .img{aspect-ratio:16/11;background:linear-gradient(180deg,var(--studio-1),var(--studio-2))}
-  .feature .img img,.feature .img svg{width:100%;height:100%;display:block;object-fit:cover}
+  .feature .img{aspect-ratio:16/9;background:linear-gradient(180deg,var(--studio-1),var(--studio-2))}
+  .feature .img img{width:100%;height:100%;display:block;object-fit:contain}
+  .feature .img svg{width:100%;height:100%;display:block;object-fit:cover}
   .feature .cap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-top:1px solid var(--line)}
   .feature .cap .nm{font-weight:600}
   .feature .cap .rf{font-size:.78rem;color:var(--muted);margin-top:1px}
@@ -143,8 +144,9 @@
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
   .car{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .16s ease,box-shadow .16s ease,border-color .16s}
   .car:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--line-2)}
-  .car .img{aspect-ratio:16/10;background:linear-gradient(180deg,var(--studio-1),var(--studio-2))}
-  .car .img img,.car .img svg{width:100%;height:100%;display:block;object-fit:cover}
+  .car .img{aspect-ratio:16/9;background:linear-gradient(180deg,var(--studio-1),var(--studio-2))}
+  .car .img img{width:100%;height:100%;display:block;object-fit:contain}
+  .car .img svg{width:100%;height:100%;display:block;object-fit:cover}
   .car.sold .img{filter:grayscale(.7) opacity(.82)}
   .car .b{padding:15px 16px 16px;display:flex;flex-direction:column;gap:3px;flex:1}
   .car .row1{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
@@ -190,8 +192,9 @@
   .sheet .close{position:absolute;top:14px;right:14px;z-index:3;width:36px;height:36px;border-radius:8px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;box-shadow:var(--shadow-sm)}
   .detail{display:grid;grid-template-columns:1.05fr .95fr}
   .detail .media{background:linear-gradient(180deg,var(--studio-1),var(--studio-2))}
-  .detail .media .big{aspect-ratio:16/11}
-  .detail .media .big img,.detail .media .big svg{width:100%;height:100%;display:block;object-fit:cover}
+  .detail .media .big{aspect-ratio:16/9}
+  .detail .media .big img{width:100%;height:100%;display:block;object-fit:contain}
+  .detail .media .big svg{width:100%;height:100%;display:block;object-fit:cover}
   .gal-thumbs{display:flex;gap:8px;padding:12px;flex-wrap:wrap;border-top:1px solid var(--line)}
   .gal-thumbs .gt{width:62px;height:42px;overflow:hidden;border:1px solid var(--line);border-radius:6px;cursor:pointer}
   .gal-thumbs .gt.on{border-color:var(--accent);border-width:2px}
@@ -288,10 +291,23 @@
   .paint-row{display:flex;gap:8px;flex-wrap:wrap}
   .paint{width:28px;height:28px;border-radius:7px;border:2px solid var(--line);cursor:pointer}
   .paint.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--accent)}
-  .imgprev-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-  .imgprev{position:relative;width:84px;height:56px;overflow:hidden;border:1px solid var(--line);border-radius:7px}
-  .imgprev img{width:100%;height:100%;object-fit:cover;display:block}
-  .imgprev button{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:6px;background:rgba(0,0,0,.6);color:#fff;font-weight:700;line-height:1;display:grid;place-items:center;font-size:.85rem}
+  .imgprev-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .imgprev{position:relative;width:100px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+  .imgprev .thumb{height:62px;background:linear-gradient(180deg,var(--studio-1),var(--studio-2))}
+  .imgprev .thumb img{width:100%;height:100%;object-fit:contain;display:block}
+  .imgprev .main-badge{position:absolute;top:4px;left:4px;background:var(--accent);color:var(--on-accent);font-size:.6rem;font-weight:700;padding:2px 5px;border-radius:4px;letter-spacing:.02em}
+  .imgprev .ctrl{display:flex;gap:3px;justify-content:center;padding:4px;border-top:1px solid var(--line)}
+  .imgprev .ctrl button{width:24px;height:22px;border-radius:5px;border:1px solid var(--line);font-size:.9rem;line-height:1;display:grid;place-items:center;background:var(--surface);color:var(--ink-2)}
+  .imgprev .ctrl button:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+  .imgprev .ctrl button:disabled{opacity:.3;cursor:default}
+  .imgprev .ctrl button.rm:hover{border-color:var(--crit);color:var(--crit)}
+  .suggest-label{font-size:.76rem;color:var(--muted);margin-top:10px;margin-bottom:6px}
+  .suggest{display:flex;flex-wrap:wrap;gap:6px}
+  .suggest button{font-size:.78rem;border:1px solid var(--line);border-radius:99px;padding:5px 11px;background:var(--surface);color:var(--ink-2)}
+  .suggest button:hover{border-color:var(--accent);color:var(--accent)}
+  .suggest button.added{opacity:.45;text-decoration:line-through;pointer-events:none}
+  .sim-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+  .btn.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
   input[type=file]{font-size:.85rem;color:var(--ink-2)}
   input[type=file]::file-selector-button{margin-right:10px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink);padding:8px 12px;border-radius:8px;font-weight:600;font-size:.82rem;cursor:pointer}
 
@@ -467,6 +483,10 @@
     <div class="admin-body">
       <div class="wrap">
         <div id="dashPane">
+          <div class="sim-bar">
+            <button id="simBtn" class="btn btn-ghost btn-sm" onclick="toggleSim()">▶ Simuler live-trafikk</button>
+            <span class="muted" style="font-size:.82rem">Tallene oppdateres automatisk mens den er på — fint til demonstrasjon. Du kan også skrive inn tall manuelt under «Biler» → «Rediger».</span>
+          </div>
           <div class="kpis" id="kpis"></div>
           <div class="panels">
             <div class="panel">
@@ -521,8 +541,13 @@
           <div class="field"><label>Drivstoff</label><select id="cfFuel"><option>Bensin</option><option>Diesel</option><option>Hybrid</option><option>Ladbar hybrid</option><option>Elektrisk</option></select></div>
           <div class="field"><label>Girkasse</label><select id="cfGear"><option>Automat</option><option>Manuell</option></select></div>
           <div class="field"><label>Effekt (hk)</label><input id="cfPower" type="number" placeholder="197"></div>
+          <div class="field"><label>Visninger (statistikk)</label><input id="cfViews" type="number" min="0" placeholder="0"></div>
+          <div class="field"><label>Meldinger (statistikk)</label><input id="cfMsgs" type="number" min="0" placeholder="0"></div>
           <div class="field full"><label>Beskrivelse</label><textarea id="cfDesc" placeholder="Beskriv bilen…"></textarea></div>
-          <div class="field full"><label>Utstyr (ett per linje)</label><textarea id="cfEquip" placeholder="Skinnseter&#10;Navigasjon&#10;Ryggekamera"></textarea></div>
+          <div class="field full"><label>Utstyr (ett per linje)</label><textarea id="cfEquip" placeholder="Skinnseter&#10;Navigasjon&#10;Ryggekamera" oninput="updateEquipSuggest()"></textarea>
+            <div class="suggest-label">Vanlig utstyr — klikk for å legge til</div>
+            <div class="suggest" id="equipSuggest"></div>
+          </div>
           <div class="field full"><label>Bilder av bilen (kan velge flere)</label>
             <input id="cfImages" type="file" accept="image/*" multiple onchange="handleImgFiles(this)">
             <div class="imgprev-row" id="cfImgPreview"></div>
@@ -754,6 +779,7 @@ function setView(v){
   document.getElementById('publicView').style.display=v==='public'?'block':'none';
   document.getElementById('adminView').style.display=v==='admin'?'block':'none';
   if(v==='admin'){document.getElementById('adminLogin').style.display=isLoggedIn?'none':'block';document.getElementById('adminShell').style.display=isLoggedIn?'block':'none';if(isLoggedIn)renderAdmin();}
+  if(v!=='admin'){stopSim();}
   const onPublic=v==='public';
   if(!onPublic){chatOpen=false;document.getElementById('chatPanel').classList.remove('open');}
   document.getElementById('chatFab').style.display=(onPublic&&!chatOpen)?'flex':'none';
@@ -834,13 +860,55 @@ function setAdminTab(t){
   document.getElementById('carsPane').style.display=t==='cars'?'block':'none';
   if(t==='dash')renderChart();
 }
+/* ---------- Live-simulering av trafikk ---------- */
+const SIMNAMES=['Jonas Berg','Emma Dahl','Sander Vik','Nora Lund','Henrik Moe','Thea Ruud','Lars Ese','Maja Holm','Petter Aas','Live Ø.'];
+let simTimer=null;
+function stopSim(){if(simTimer){clearInterval(simTimer);simTimer=null;}const b=document.getElementById('simBtn');if(b){b.classList.remove('on');b.textContent='▶ Simuler live-trafikk';}}
+function toggleSim(){
+  if(simTimer){stopSim();return;}
+  const b=document.getElementById('simBtn');b.classList.add('on');b.textContent='⏸ Stopp simulering';
+  simTimer=setInterval(()=>{
+    const avail=cars.filter(c=>c.status!=='sold');if(!avail.length)return;
+    const c=avail[Math.floor(Math.random()*avail.length)];
+    c.views+=Math.floor(1+Math.random()*3);
+    if(Math.random()<0.12){
+      c.messages++;
+      leads.unshift({id:'l'+Date.now(),carId:c.id,name:SIMNAMES[Math.floor(Math.random()*SIMNAMES.length)],phone:'9'+Math.floor(10000000+Math.random()*89999999),message:'Hei, er '+c.brand+' '+c.model+' fortsatt tilgjengelig?',created:Date.now()});
+    }
+    save();renderKPIs();renderChart();renderLeads();
+  },1500);
+}
 function toggleSold(id){const c=cars.find(x=>x.id===id);c.status=c.status==='sold'?'available':'sold';save();renderAdmin();renderInventory();showToast(c.status==='sold'?'Markert som solgt':'Lagt ut igjen');}
 function deleteCar(id){const c=cars.find(x=>x.id===id);if(!confirm('Slette '+c.brand+' '+c.model+'?'))return;cars=cars.filter(x=>x.id!==id);save();renderAdmin();renderInventory();showToast('Bil slettet');}
 
 /* ---------- Car form ---------- */
+const COMMON_EQUIP=['Skinnseter','Delskinn','Navigasjon','Ryggekamera','360° kamera','Adaptiv cruise','Cruisekontroll','Apple CarPlay','Android Auto','Parkeringssensorer','Elektrisk bakluke','Panoramatak','Skyvetak','Hengerfeste','Vinterhjul medfølger','DAB+','Klimaanlegg','2-soners klima','Varmeseter','Varme i ratt','Head-up display','Matrix LED','LED-lykter','Filskiftevarsel','Nøkkelløs betjening','El-justerbare seter','Minne på seter','Elektrisk innfellbare speil','Automatisk parkering','Blindsonevarsel'];
+function updateEquipSuggest(){
+  const box=document.getElementById('equipSuggest');if(!box)return;
+  const cur=document.getElementById('cfEquip').value.split('\n').map(s=>s.trim().toLowerCase()).filter(Boolean);
+  box.innerHTML=COMMON_EQUIP.map(e=>`<button type="button" class="${cur.includes(e.toLowerCase())?'added':''}" onclick="addEquip('${e.replace(/'/g,"\\'")}')">+ ${e}</button>`).join('');
+}
+function addEquip(item){
+  const ta=document.getElementById('cfEquip');
+  const list=ta.value.split('\n').map(s=>s.trim()).filter(Boolean);
+  if(list.some(x=>x.toLowerCase()===item.toLowerCase()))return;
+  list.push(item);ta.value=list.join('\n');updateEquipSuggest();
+}
 let selectedPaint=PAINTS[3];
 let formImages=[];
-function renderFormImages(){document.getElementById('cfImgPreview').innerHTML=formImages.map((src,i)=>`<div class="imgprev"><img src="${src}" alt=""><button type="button" onclick="removeFormImage(${i})" aria-label="Fjern">×</button></div>`).join('');}
+function renderFormImages(){
+  document.getElementById('cfImgPreview').innerHTML=formImages.map((src,i)=>`
+    <div class="imgprev">
+      <div class="thumb"><img src="${src}" alt=""></div>
+      ${i===0?'<span class="main-badge">Hovedbilde</span>':''}
+      <div class="ctrl">
+        <button type="button" onclick="moveImg(${i},-1)" ${i===0?'disabled':''} aria-label="Flytt til venstre" title="Flytt fram">‹</button>
+        <button type="button" onclick="moveImg(${i},1)" ${i===formImages.length-1?'disabled':''} aria-label="Flytt til høyre" title="Flytt bak">›</button>
+        <button type="button" class="rm" onclick="removeFormImage(${i})" aria-label="Fjern" title="Fjern">×</button>
+      </div>
+    </div>`).join('');
+}
+function moveImg(i,dir){const j=i+dir;if(j<0||j>=formImages.length)return;[formImages[i],formImages[j]]=[formImages[j],formImages[i]];renderFormImages();}
 function removeFormImage(i){formImages.splice(i,1);renderFormImages();}
 function fileToDataURL(file,maxW,cb){const r=new FileReader();r.onload=e=>{const img=new Image();img.onload=()=>{let w=img.width,h=img.height;if(w>maxW){h=Math.round(h*maxW/w);w=maxW;}const cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(img,0,0,w,h);cb(cv.toDataURL('image/jpeg',0.82));};img.src=e.target.result;};r.readAsDataURL(file);}
 function handleImgFiles(input){[...input.files].forEach(f=>fileToDataURL(f,1280,d=>{formImages.push(d);renderFormImages();}));input.value='';}
@@ -858,8 +926,11 @@ function openCarForm(id){
   document.getElementById('cfFuel').value=f?f.fuel:'Bensin';
   document.getElementById('cfGear').value=f?f.gear:'Automat';
   document.getElementById('cfPower').value=f?f.power:'';
+  document.getElementById('cfViews').value=f?f.views:0;
+  document.getElementById('cfMsgs').value=f?f.messages:0;
   document.getElementById('cfDesc').value=f?f.desc:'';
   document.getElementById('cfEquip').value=f?f.equip.join('\n'):'';
+  updateEquipSuggest();
   buildPaints(f?f.color:PAINTS[3]);
   formImages=(f&&f.images)?[...f.images]:[];renderFormImages();
   document.getElementById('cfImages').value='';
@@ -883,10 +954,12 @@ function saveCarForm(e){
     desc:document.getElementById('cfDesc').value.trim()||'Ingen beskrivelse lagt inn.',
     equip:document.getElementById('cfEquip').value.split('\n').map(s=>s.trim()).filter(Boolean),
     color:selectedPaint,
-    images:formImages.slice()
+    images:formImages.slice(),
+    views:Math.max(0,+document.getElementById('cfViews').value||0),
+    messages:Math.max(0,+document.getElementById('cfMsgs').value||0)
   };
   if(id){Object.assign(cars.find(x=>x.id===id),data);showToast('Bil oppdatert');}
-  else{cars.unshift({id:'c'+Date.now(),ref:'OB-'+Math.floor(1000+Math.random()*8999),status:'available',views:0,messages:0,created:Date.now(),...data});showToast('Ny bil lagt ut');}
+  else{cars.unshift({id:'c'+Date.now(),ref:'OB-'+Math.floor(1000+Math.random()*8999),status:'available',created:Date.now(),...data});showToast('Ny bil lagt ut');}
   save();closeCarForm();renderAdmin();renderInventory();
 }
 
