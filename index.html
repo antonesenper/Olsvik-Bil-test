@@ -178,6 +178,8 @@
   footer.site{border-top:1px solid var(--line);margin-top:20px}
   footer.site .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center;padding:32px 24px}
   footer.site .note{color:var(--muted);font-size:.82rem;line-height:1.6}
+  .staff-link{color:var(--muted);font-size:.8rem;display:inline-flex;align-items:center;gap:6px;opacity:.7;transition:opacity .15s,color .15s}
+  .staff-link:hover{opacity:1;color:var(--accent)}
 
   /* ============ MODAL ============ */
   .modal{position:fixed;inset:0;z-index:60;display:none;align-items:flex-start;justify-content:center;padding:38px 18px;overflow:auto}
@@ -421,6 +423,10 @@
     <div class="wrap">
       <a class="brand" href="#" onclick="goPublic();return false"><span class="dot"></span>Olsvik <em>Bil</em></a>
       <div class="note">Demoversjon · Innhold og priser er fiktive eksempler.<br>© 2026 Olsvik Bil AS · Olsvikåsen 12, 5183 Bergen</div>
+      <a class="staff-link" href="#" onclick="goAdmin();return false" title="Kun for ansatte">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        Forhandlerinnlogging
+      </a>
     </div>
   </footer>
 </div>
@@ -754,7 +760,7 @@ function setView(v){
   window.scrollTo(0,0);
 }
 function goPublic(){if(location.hash){history.replaceState(null,'',location.pathname+location.search);}setView('public');}
-function goAdmin(){if(currentRoute()!=='admin'){location.hash='admin';}else{setView('admin');}}
+function goAdmin(){setView('admin');}
 window.addEventListener('hashchange',()=>setView(currentRoute()==='admin'?'admin':'public'));
 
 let isLoggedIn=false;
@@ -922,7 +928,10 @@ function botReply(q){
 let toastT;
 function showToast(msg){const t=document.getElementById('toast');t.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>'+msg;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2600);}
 function renderAll(){renderInventory();document.getElementById('heroCount').textContent=cars.filter(c=>c.status!=='sold').length;if(isLoggedIn)renderAdmin();}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCar();closeCarForm();}});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeCar();closeCarForm();}
+  if((e.ctrlKey||e.metaKey)&&e.shiftKey&&(e.key==='A'||e.key==='a')){e.preventDefault();goAdmin();}
+});
 
 /* ---------- Boot ---------- */
 (function init(){
